@@ -54,8 +54,11 @@ class LinkedinScraper:
                                                       'li.reusable-search__result-container')
         all_profils_info = []
         for profile_content in all_profils_list:
-            connect_or_follow = profile_content.find_element(By.CSS_SELECTOR,
-                                                             'div.entity-result__actions.entity-result__divider').text
+            try:
+                connect_or_follow = profile_content.find_element(By.CSS_SELECTOR,
+                                                                 'div.entity-result__actions.entity-result__divider').text
+            except:
+                continue
             if connect_or_follow not in ["Se connecter", "Suivre"]:
                 continue
             linkedin_profile_link = profile_content.find_element(By.CSS_SELECTOR, 'a').get_attribute('href')
